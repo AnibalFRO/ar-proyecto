@@ -19,12 +19,8 @@
       </a-marker>
 
       <!-- Marcador 2 -->
-      <a-marker type="pattern" src="pattern-qr2.patt">
-        <a-entity 
-          gltf-model="modelo2.glb" 
-          scale="0.5 0.5 0.5" 
-          rotation="0 180 0">
-        </a-entity>
+      <a-marker type="pattern" url="pattern-qr2.patt">
+        <a-plane id="imagePlane" position="0 0 0" rotation="-90 0 0" width="4" height="2.25" material="shader: flat; scale: 2 2 2"></a-plane>
       </a-marker>
 
       <!-- Cámara -->
@@ -32,4 +28,5 @@
     </a-scene>
   </body>
 </html>
+
 
