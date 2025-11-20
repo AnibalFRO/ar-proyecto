@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <!-- A-FRAME (descargar aframe.min.js y ponerlo en la misma carpeta) -->
+    <script src="aframe.min.js"></script>
+
+    <!-- AR.js OFFLINE -->
+    <script src="ar.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            background: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Franja superior marrón */
+        .header {
+            width: 100%;
+            background: #5a3e1b;   /* marrón */
+            color: white;
+            padding: 30px 20px;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        /* Cuadro blanco de descripción */
+        .description-box {
+            width: 80%;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* Ajuste del área AR */
+        .ar-container {
+            width: 100%;
+            height: calc(100vh - 250px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Franja Marrón -->
+    <div class="header">
+        Proyecto de Realidad Aumentada
+    </div>
+
+    <!-- Tarjeta Blanca para Descripción -->
+    <div class="description-box">
+        Aquí va una descripción del modelo 3D o del proyecto.<br>
+        Podés escribir lo que quieras, agregar instrucciones, etc.
+    </div>
+
+    <!-- Sistema AR -->
+    <div class="ar-container">
+        <a-scene embedded arjs="trackingMethod: best; sourceType: webcam;">
+
+            <!-- Marcador -->
+            <a-marker type="pattern" url="marcador.patt">
+
+                <!-- Modelo 3D -->
+                <a-entity id="modelo"
+                    gltf-model="modelo.glb"
+                    scale="0.5 0.5 0.5"
+                    rotation="0 0 0"
+                    position="0 0 0">
+                </a-entity>
+
+            </a-marker>
+
+            <a-entity camera></a-entity>
+        </a-scene>
+    </div>
+
+    <script>
+        // CLICK EN EL MODELO
+        document.addEventListener("DOMContentLoaded", () => {
+            const modelo = document.querySelector("#modelo");
+
+            modelo.addEventListener("click", () => {
+
+                // 👉 CAMBIAR ESTE LINK 👈
+                window.location.href = "https://TU-PAGINA.com";
+
+            });
+        });
+    </script>
+
+</body>
+</html>
