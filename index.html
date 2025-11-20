@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
 
-    <!-- A-FRAME (descargar aframe.min.js y ponerlo en la misma carpeta) -->
+    <!-- A-FRAME -->
     <script src="aframe.min.js"></script>
 
-    <!-- AR.js OFFLINE -->
+    <!-- AR.js -->
     <script src="ar.js"></script>
 
     <style>
@@ -14,19 +14,20 @@
             margin: 0;
             background: #f2f2f2;
             font-family: Arial, sans-serif;
+            overflow-x: hidden;
         }
 
-        /* Franja superior marrón */
+        /* Franja superior */
         .header {
             width: 100%;
-            background: #5a3e1b;   /* marrón */
+            background: #5a3e1b;
             color: white;
             padding: 30px 20px;
             font-size: 28px;
             text-align: center;
         }
 
-        /* Cuadro blanco de descripción */
+        /* Cuadro blanco */
         .description-box {
             width: 80%;
             max-width: 800px;
@@ -39,10 +40,19 @@
             color: #333;
         }
 
-        /* Ajuste del área AR */
-        .ar-container {
+        /* CAJA DONDE SE ACOMODA LA REALIDAD AUMENTADA */
+        .ar-box {
             width: 100%;
-            height: calc(100vh - 250px);
+            max-width: 900px;
+            height: 360px;     /* <--- AJUSTA EL TAMAÑO DE LA AR AQUÍ */
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .ar-box * {
+            touch-action: manipulation;
         }
     </style>
 </head>
@@ -50,29 +60,36 @@
 <body>
 
     <!-- Franja Marrón -->
-    <div class="header">
-        Proyecto de Realidad Aumentada
-    </div>
+    <div class="header">Proyecto de Realidad Aumentada</div>
 
-    <!-- Tarjeta Blanca para Descripción -->
+    <!-- Tarjeta blanca -->
     <div class="description-box">
-        Aquí va una descripción del modelo 3D o del proyecto.<br>
-        Podés escribir lo que quieras, agregar instrucciones, etc.
+        Aquí va una descripción del modelo 3D o del proyecto.
+        Podés escribir lo que quieras, instrucciones, datos, etc.
     </div>
 
-    <!-- Sistema AR -->
-    <div class="ar-container">
-        <a-scene embedded arjs="trackingMethod: best; sourceType: webcam;">
+    <!-- Caja AR (achicada, no ocupa la pantalla completa) -->
+    <div class="ar-box">
+        <a-scene embedded
+                 vr-mode-ui="enabled: false"
+                 renderer="logarithmicDepthBuffer: true;"
+                 arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+            
+            <!-- Cursor que permite hacer clic al modelo -->
+            <a-entity cursor="fuse: false; rayOrigin: mouse"
+                      raycaster="objects: .clickeable">
+            </a-entity>
 
             <!-- Marcador -->
             <a-marker type="pattern" url="marcador.patt">
 
-                <!-- Modelo 3D -->
+                <!-- Modelo 3D (clickeable) -->
                 <a-entity id="modelo"
-                    gltf-model="modelo.glb"
-                    scale="0.5 0.5 0.5"
-                    rotation="0 0 0"
-                    position="0 0 0">
+                          class="clickeable"
+                          gltf-model="modelo.glb"
+                          scale="0.4 0.4 0.4"
+                          rotation="0 0 0"
+                          position="0 0 0">
                 </a-entity>
 
             </a-marker>
@@ -82,18 +99,16 @@
     </div>
 
     <script>
-        // CLICK EN EL MODELO
         document.addEventListener("DOMContentLoaded", () => {
             const modelo = document.querySelector("#modelo");
 
             modelo.addEventListener("click", () => {
 
-                // 👉 CAMBIAR ESTE LINK 👈
-                window.location.href = "https://TU-PAGINA.com";
+                //  ⬇️ ⬇️  CAMBIAR ESTA URL  ⬇️ ⬇️
+                window.location.href = "https://tu-pagina.com";
 
             });
         });
     </script>
-
 </body>
 </html>
